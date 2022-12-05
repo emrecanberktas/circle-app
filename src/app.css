@@ -1,0 +1,11 @@
+.App {
+  height: 100vh;
+}
+.point {
+  display: inline-block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: blue;
+}
