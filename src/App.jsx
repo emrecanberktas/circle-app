@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./app.css";
 
 function App() {
+  const popped = useRef([]);
   const [points, setPoints] = useState([]);
-  const [popped, setPopped] = useState([]);
   const handlePlaceCircle = (e) => {
-    console.log(e);
     const { clientX, clientY } = e;
     setPoints([...points, { x: clientX, y: clientY }]);
   };
@@ -13,20 +12,26 @@ function App() {
     const newPoints = [...points];
     const poppedPoint = newPoints.pop();
     setPoints(newPoints);
-    setPopped([...popped, poppedPoint]);
+    popped.current.push(poppedPoint);
   };
   const handleRedo = () => {
-    const newPopped = [...popped];
+    const newPopped = [...popped.current];
     const poppedPoint = newPopped.pop();
-    setPopped(newPopped);
     setPoints([...points, poppedPoint]);
+    popped.current = newPopped;
   };
+  const current = popped.current;
+  console.log({ points });
+  console.log({ current });
   return (
     <>
       <button onClick={handleUndo} disabled={points.length >= 1 ? false : true}>
         Undo
       </button>
-      <button onClick={handleRedo} disabled={popped.length == 0 ? true : false}>
+      <button
+        onClick={handleRedo}
+        disabled={popped.current.length == 0 ? true : false}
+      >
         Redo
       </button>
       <div className="App" onClick={handlePlaceCircle}>
