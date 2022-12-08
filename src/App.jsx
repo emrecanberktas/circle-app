@@ -48,7 +48,9 @@ function App() {
       <button
         onClick={handleClear}
         disabled={points.length == 0 ? true : false}
-      ></button>
+      >
+        Clear
+      </button>
       <div className="App" onClick={handlePlaceCircle}>
         {points.map((point, i) => (
           <div
