@@ -25,6 +25,11 @@ function App() {
     popped.current = newPopped;
   };
 
+  const handleClear = () => {
+    setPoints([]);
+    popped.current = [];
+  };
+
   const current = popped.current;
   console.log({ points });
   console.log({ current });
@@ -40,7 +45,10 @@ function App() {
       >
         Redo
       </button>
-
+      <button
+        onClick={handleClear}
+        disabled={points.length == 0 ? true : false}
+      ></button>
       <div className="App" onClick={handlePlaceCircle}>
         {points.map((point, i) => (
           <div
