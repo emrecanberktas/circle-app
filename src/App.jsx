@@ -77,6 +77,7 @@ function App() {
       >
         Clear
       </button>
+      <span>Circle Size {circleHeight}</span>
       <div className="App" onClick={handlePlaceCircle} onWheel={handleWheel}>
         {points.map((point, i) => (
           <div
