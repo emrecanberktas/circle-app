@@ -30,10 +30,6 @@ function App() {
     popped.current = [];
   };
 
-  const current = popped.current;
-  console.log({ points });
-  console.log({ current });
-  console.log({ color });
   return (
     <>
       <button onClick={handleUndo} disabled={points.length >= 1 ? false : true}>
@@ -64,7 +60,7 @@ function App() {
               width: "15px",
               height: "15px",
               borderRadius: "50%",
-              backgroundColor: color,
+              backgroundColor: point.color,
             }}
           ></div>
         ))}
