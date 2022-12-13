@@ -38,30 +38,44 @@ function App() {
     popped.current = [];
   };
 
-  // Change circle size on hover with wheel
+  //Change circle size on hover with wheel
+  //   const handleWheel = (e) => {
+  //     const { clientX, clientY } = e;
+  //     const newPoints = [...points];
+  //     const point = newPoints.find(
+  //       (point) =>
+  //         point.x - circleHeight / 2 < point.x < point.x + circleHeight / 2 &&
+  //         point.y - circleWidth / 2 < point.y < point.y + circleWidth / 2
+  //     );
+  //     if (point) {
+  //       if (e.deltaY > 0) {
+  //         setCircleHeight(circleHeight + 15);
+  //         setCircleWidth(circleWidth + 15);
+  //       } else {
+  //         setCircleHeight(circleHeight - 15);
+  //         setCircleWidth(circleWidth - 15);
+  //       }
+  //       setPoints(newPoints);
+  //       console.log(circleWidth, circleHeight);
+  //     }
+  //   };
+
   const handleWheel = (e) => {
-    const { clientX, clientY } = e;
     const newPoints = [...points];
-    const point = newPoints.find(
-      (point) =>
-        point.x - circleHeight / 2 < point.x < point.x + circleHeight / 2 &&
-        point.y - circleWidth / 2 < point.y < point.y + circleWidth / 2
-    );
-    if (point) {
-      if (e.deltaY > 0) {
-        setCircleHeight(circleHeight + 15);
-        setCircleWidth(circleWidth + 15);
-      } else {
-        setCircleHeight(circleHeight - 15);
-        setCircleWidth(circleWidth - 15);
-      }
-      setPoints(newPoints);
-      console.log(circleWidth, circleHeight);
+    if (e.deltaY > 0) {
+      if (circleHeight >= 360 || circleWidth >= 360) return;
+      setCircleHeight(circleHeight + 15);
+      setCircleWidth(circleWidth + 15);
+    } else {
+      if (circleHeight <= 15 || circleWidth <= 15) return;
+      setCircleHeight(circleHeight - 15);
+      setCircleWidth(circleWidth - 15);
     }
+    setPoints(newPoints);
   };
 
   return (
-    <>
+    <div onWheel={handleWheel}>
       <button onClick={handleUndo} disabled={points.length >= 1 ? false : true}>
         Undo
       </button>
@@ -77,8 +91,8 @@ function App() {
       >
         Clear
       </button>
-      <span>Circle Size {circleHeight}</span>
-      <div className="App" onClick={handlePlaceCircle} onWheel={handleWheel}>
+      <span>Diameter of Circle {circleHeight}</span>
+      <div className="App" onClick={handlePlaceCircle}>
         {points.map((point, i) => (
           <div
             className="point"
@@ -96,7 +110,7 @@ function App() {
           ></div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 
