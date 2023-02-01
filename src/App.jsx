@@ -38,28 +38,6 @@ function App() {
     popped.current = [];
   };
 
-  //Change circle size on hover with wheel
-  //   const handleWheel = (e) => {
-  //     const { clientX, clientY } = e;
-  //     const newPoints = [...points];
-  //     const point = newPoints.find(
-  //       (point) =>
-  //         point.x - circleHeight / 2 < point.x < point.x + circleHeight / 2 &&
-  //         point.y - circleWidth / 2 < point.y < point.y + circleWidth / 2
-  //     );
-  //     if (point) {
-  //       if (e.deltaY > 0) {
-  //         setCircleHeight(circleHeight + 15);
-  //         setCircleWidth(circleWidth + 15);
-  //       } else {
-  //         setCircleHeight(circleHeight - 15);
-  //         setCircleWidth(circleWidth - 15);
-  //       }
-  //       setPoints(newPoints);
-  //       console.log(circleWidth, circleHeight);
-  //     }
-  //   };
-
   const handleWheel = (e) => {
     const newPoints = [...points];
     if (e.deltaY > 0) {
@@ -76,18 +54,24 @@ function App() {
 
   return (
     <div onWheel={handleWheel}>
-      <button onClick={handleUndo} disabled={points.length >= 1 ? false : true}>
+      <button
+        onClick={handleUndo}
+        disabled={points.length >= 1 ? false : true}
+        className="buttons"
+      >
         Undo
       </button>
       <button
         onClick={handleRedo}
         disabled={popped.current.length == 0 ? true : false}
+        className="buttons"
       >
         Redo
       </button>
       <button
         onClick={handleClear}
         disabled={points.length == 0 ? true : false}
+        className="buttons"
       >
         Clear
       </button>
